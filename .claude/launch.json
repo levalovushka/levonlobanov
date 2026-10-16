@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mosaic",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["infra/serve.py", "sites/mosaic", "8743"],
+      "port": 8743
+    }
+  ]
+}

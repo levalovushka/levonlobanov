@@ -4,7 +4,7 @@
     {
       "name": "mosaic",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8743", "--bind", "127.0.0.1"],
+      "runtimeArgs": ["../../infra/serve.py", ".", "8743"],
       "port": 8743
     }
   ]

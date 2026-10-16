@@ -22,6 +22,8 @@ services:
       - ./site:/srv/site:ro
       # Static subprojects, synced from the repo's sites/ by deploy.sh.
       - /srv/sites:/srv/sites:ro
+      # Assets shared by all sites (fonts), served at /_shared/.
+      - /srv/shared:/srv/shared:ro
       - caddy_data:/data
       - caddy_config:/config
     networks:

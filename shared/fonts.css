@@ -1,0 +1,24 @@
+/* Shared fonts for levonlobanov.com and its subdomains.
+   Served at /_shared/fonts.css on every site (Caddy snippet `static`).
+   Font files are built by infra/build-fonts.sh and are not in git. */
+
+@font-face {
+  font-family: "Pragmatica Next";
+  src: url("fonts/pragmatica-next.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pragmatica Next";
+  src: url("fonts/pragmatica-next-slanted.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  /* "Pragmatica Next VF" is the locally installed desktop font. */
+  --font-sans: "Pragmatica Next", "Pragmatica Next VF", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}

@@ -1,7 +1,22 @@
-levonlobanov.com {
+# Static site with the shared assets (fonts) at /_shared/.
+# Usage: import static <root dir>
+(static) {
 	encode zstd gzip
-	root * /srv/site
-	file_server
+
+	handle_path /_shared/* {
+		root * /srv/shared
+		header /fonts/* Cache-Control "public, max-age=2592000"
+		file_server
+	}
+
+	handle {
+		root * {args[0]}
+		file_server
+	}
+}
+
+levonlobanov.com {
+	import static /srv/site
 }
 
 www.levonlobanov.com {
@@ -11,12 +26,10 @@ www.levonlobanov.com {
 # Static subprojects from sites/<name>.
 
 mosaic.levonlobanov.com {
-	encode zstd gzip
-	root * /srv/sites/mosaic
-	file_server
+	import static /srv/sites/mosaic
 }
 
-# Subprojects: one block per subdomain, proxying to a container on the `web` network.
+# Container subprojects: one block per subdomain, proxying to a container on the `web` network.
 #
 # example.levonlobanov.com {
 # 	reverse_proxy example:8080

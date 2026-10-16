@@ -1,1 +1,12 @@
 .DS_Store
+
+# Licensed font binaries (ParaType EULA) — never in this public repo.
+# Rebuild with infra/build-fonts.sh.
+shared/fonts/
+*.woff
+*.woff2
+*.ttf
+*.otf
+
+infra/.venv/
+__pycache__/

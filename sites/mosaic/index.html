@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mosaic Shader</title>
+<link rel="preload" href="/_shared/fonts/pragmatica-next.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/_shared/fonts.css">
 <style>
   /* One type size for everything you read or press (13px); 11px only for error text.
      Motion follows Emil Kowalski's and Jakub Krehel's guidance: ease-out for things that appear,
@@ -29,7 +31,7 @@
   /* squircle corners wherever there is a radius (falls back to plain rounding elsewhere) */
   *, *::before, *::after { box-sizing: border-box; corner-shape: superellipse(2); }
   html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text);
-    font: var(--fs)/1.3 ui-sans-serif, -apple-system, "SF Pro Text", "Inter", system-ui, sans-serif;
+    font: var(--fs)/1.3 var(--font-sans);
     -webkit-font-smoothing: antialiased; }
   body { height: 100vh; overflow: hidden; }
   button { font: inherit; color: inherit; }
