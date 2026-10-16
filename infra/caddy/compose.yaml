@@ -1,0 +1,34 @@
+# Edge reverse proxy for levonlobanov.com and its subdomains.
+# Deployed to /srv/caddy on the server by infra/deploy.sh.
+#
+# Subprojects join the shared `web` network instead of publishing ports:
+#   networks:
+#     web:
+#       external: true
+# Docker-published ports bypass ufw, so only Caddy publishes any.
+
+services:
+  caddy:
+    image: caddy:2.11
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      # Directory mount, not a single-file mount: rsync replaces files,
+      # and a single-file bind mount would keep pointing at the old inode.
+      - ./conf:/etc/caddy:ro
+      - ./site:/srv/site:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - web
+
+networks:
+  web:
+    name: web
+
+volumes:
+  caddy_data:
+  caddy_config:

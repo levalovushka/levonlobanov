@@ -1,0 +1,15 @@
+levonlobanov.com {
+	encode zstd gzip
+	root * /srv/site
+	file_server
+}
+
+www.levonlobanov.com {
+	redir https://levonlobanov.com{uri} permanent
+}
+
+# Subprojects: one block per subdomain, proxying to a container on the `web` network.
+#
+# example.levonlobanov.com {
+# 	reverse_proxy example:8080
+# }
