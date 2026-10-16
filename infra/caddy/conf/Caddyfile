@@ -8,6 +8,14 @@ www.levonlobanov.com {
 	redir https://levonlobanov.com{uri} permanent
 }
 
+# Static subprojects from sites/<name>.
+
+mosaic.levonlobanov.com {
+	encode zstd gzip
+	root * /srv/sites/mosaic
+	file_server
+}
+
 # Subprojects: one block per subdomain, proxying to a container on the `web` network.
 #
 # example.levonlobanov.com {

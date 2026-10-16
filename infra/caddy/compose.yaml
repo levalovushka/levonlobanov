@@ -20,6 +20,8 @@ services:
       # and a single-file bind mount would keep pointing at the old inode.
       - ./conf:/etc/caddy:ro
       - ./site:/srv/site:ro
+      # Static subprojects, synced from the repo's sites/ by deploy.sh.
+      - /srv/sites:/srv/sites:ro
       - caddy_data:/data
       - caddy_config:/config
     networks:

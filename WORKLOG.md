@@ -1,5 +1,12 @@
 # Worklog
 
+## 2026-10-16 — Mosaic on mosaic.levonlobanov.com
+
+- **What:** Mosaic (static WebGL tool, no build) copied from its Claude scratch workspace into `sites/mosaic/` (source files, `assets/runner.webp`, its WORKLOG and launch.json minus the stale `mosaic-dist` entry). `compose.yaml` mounts `/srv/sites` read-only; `Caddyfile` serves `mosaic.levonlobanov.com` from `/srv/sites/mosaic`; `deploy.sh` also rsyncs `sites/` → `/srv/sites/`, skipping `.claude` and `WORKLOG.md`.
+- **Why:** first subdomain project. Static sites go straight to Caddy's file_server — no container per site. Test clips (incl. the user's own clip), koi reference, `dist/` and the zip were left out: private or redundant (`dist/` was a byte-identical copy).
+- **Verified:** `./infra/deploy.sh` exit 0; Let's Encrypt cert obtained for mosaic; `/`, three JS modules, `runner.webp` → 200 (JS/HTML zstd); `/WORKLOG.md`, `/.claude/launch.json` → 404; strict TLS from the Mac → 200 verify=0. Browser pane: page "Mosaic Shader" renders the mosaic, 1 canvas, 18 sliders, no console errors.
+- **Left:** source of truth is now `sites/mosaic/`; the scratch workspace copy is untouched and will drift. Pushed nothing.
+
 ## 2026-10-16 — Server bootstrap (Timeweb Cloud, Amsterdam, 194.87.221.121)
 
 - **What:** Ubuntu 24.04 VPS hardened and set up as edge for `levonlobanov.com` + subdomains. Server: user `levon` (key-only, NOPASSWD sudo, docker group); `/etc/ssh/sshd_config.d/00-hardening.conf` (no root, no passwords); ufw allows only 22/tcp, 80/tcp, 443/tcp+udp; 2 GB `/swapfile`, swappiness 10; Docker 29.9.1 + compose v5.6.0 from Docker's apt repo, log rotation in `/etc/docker/daemon.json`; Caddy 2.11 in `/srv/caddy` on shared network `web`. Repo: `infra/caddy/{compose.yaml,conf/Caddyfile,site/index.html}`, `infra/deploy.sh`, `.gitignore`. Local: `Host folio` in `~/.ssh/config` (backup `~/.ssh/config.bak-folio`).
